@@ -36,4 +36,36 @@ public class User {
             return equipoUno+":"+equipoDos+":"+equipoTres+":"+equipoCuatro;
 
     }
+
+    public String getEquipoUno() {
+        return equipoUno;
+    }
+
+    public void setEquipoUno(String equipoUno) {
+        this.equipoUno = equipoUno;
+    }
+
+    public String getEquipoDos() {
+        return equipoDos;
+    }
+
+    public void setEquipoDos(String equipoDos) {
+        this.equipoDos = equipoDos;
+    }
+
+    public String getEquipoTres() {
+        return equipoTres;
+    }
+
+    public void setEquipoTres(String equipoTres) {
+        this.equipoTres = equipoTres;
+    }
+
+    public String getEquipoCuatro() {
+        return equipoCuatro;
+    }
+
+    public void setEquipoCuatro(String equipoCuatro) {
+        this.equipoCuatro = equipoCuatro;
+    }
 }

@@ -62,7 +62,7 @@ public class Logic {
 
         usuarios.add(new User("COL", "MEX","CHL","ESP"));
         usuarios.add(new User("COL", "URY","CHL","ESP"));
-        usuarios.add(new User("COL", "ING","KOR","ESP"));
+        usuarios.add(new User("COL", "GRC","KOR","ESP"));
 
     }
 
