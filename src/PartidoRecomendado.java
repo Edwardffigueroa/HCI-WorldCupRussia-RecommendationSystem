@@ -13,10 +13,10 @@ public class PartidoRecomendado {
     ArrayList<String> interseccion;
 
     public PartidoRecomendado(ArrayList<Partido> partidos, ArrayList<User> usuarios) {
+
         this.partidos=partidos;
         this.usuarios=usuarios;
         interseccion= new ArrayList<String>();
-
     }
 
     public void partidosAceptables(){
@@ -24,8 +24,10 @@ public class PartidoRecomendado {
         User uno=usuarios.get(0);
         User dos=usuarios.get(1);
         User tres= usuarios.get(2);
+       // User cuatro= usuarios.get(3);
 
-        Collection<String> interna= getIntersection(uno.getEquipos(), dos.getEquipos(),tres.getEquipos() );
+        Collection<String> interna= getIntersection(uno.getEquipos(),dos.getEquipos(), tres.getEquipos());
+
         interseccion.addAll(interna);
 
 
@@ -44,7 +46,10 @@ public class PartidoRecomendado {
 
                 if (interseccion.get(j).equals(p.getEquipoUno())| interseccion.get(j).equals(p.getEquipoDos())){
 
+                    p.partidoAceptable();
+
                     System.out.println("partido aceptable: "+p.getEquipoUno()+" "+p.getEquipoDos());
+
 
                 }
             }
@@ -72,9 +77,9 @@ public class PartidoRecomendado {
             totalEquipos.add(u.getEquipoCuatro());
 
         }
-        for (int i = 0; i <totalEquipos.size() ; i++) {
+        //for (int i = 0; i <totalEquipos.size() ; i++) {
           //  System.out.println(totalEquipos.get(i));
-        }
+        //}
 
 
         for (int i = 0; i <partidos.size() ; i++) {
@@ -89,13 +94,11 @@ public class PartidoRecomendado {
                         if (p.getEquipoDos().equals(totalEquipos.get(k))){
 
                             System.out.println("partido ideal: " + p.getEquipoUno() + " " + p.getEquipoDos());
+                            p.partidoIdeal();
 
                         }
 
-
                     }
-
-
 
                 }
 
@@ -120,6 +123,8 @@ public class PartidoRecomendado {
         }
         return intersection;
     }
+
+
 
 
 

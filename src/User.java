@@ -68,4 +68,6 @@ public class User {
     public void setEquipoCuatro(String equipoCuatro) {
         this.equipoCuatro = equipoCuatro;
     }
+
+
 }

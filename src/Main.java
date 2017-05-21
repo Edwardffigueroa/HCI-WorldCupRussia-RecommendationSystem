@@ -21,8 +21,10 @@ public class Main extends PApplet {
     }
 
     @Override
-    public void settings() {
-        size(200,200);
+    public void settings()
+    {
+     //   size(1000,800);
+        fullScreen();
     }
 
     @Override
@@ -41,8 +43,23 @@ public class Main extends PApplet {
 
     @Override
     public void draw() {
+        background(80);
+        log.pintar();
 
     }
 
+    @Override
+    public void mousePressed() {
+        log.pressed();
+    }
 
+    @Override
+    public void mouseDragged() {
+        log.dragged();
+    }
+
+    @Override
+    public void mouseReleased() {
+        log.released();
+    }
 }
