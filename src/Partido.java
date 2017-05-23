@@ -107,7 +107,7 @@ public class Partido {
         app.ellipse(pose.x, pose.y, alto,alto);
 
 
-//----------------------------------------
+//----------------------------------------INFORMACIÓN DEL PARTIDO
         if(app.dist(app.mouseX, app.mouseY, pose.x, pose.y)<alto/2){ //MOSTRAR INFORMACIÓN
 
             app.pushMatrix();
@@ -115,12 +115,18 @@ public class Partido {
             app.rotate(rotationAngle);
 
         app.fill(0);
-        app.rectMode(app.CENTER);
-        app.rect(-100, 0, ancho, alto);
+        app.rectMode(app.CORNER);
+        app.rect(-120, 0, ancho, 70);
         app.fill(255);
-        app.text("info", -100,15);
+        app.text(equipoUno+"vs"+equipoDos, -100,15);
+        app.text("Ciudad: "+ciudad, -120,25);
+        app.text("Fecha: "+fecha, -120,35);
+        app.text("Hora: "+hora, -120,45);
+        app.text("Costo: "+costo, -120,55);
+        app.text("Grupo: "+grupo, -120,65);
 
         app.popMatrix();
+
     }
 
 

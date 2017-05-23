@@ -21,7 +21,6 @@ public class User {
 
         equipos= new ArrayList<>();
 
-
         equipos.add(equipoUno);
         equipos.add(equipoDos);
         equipos.add(equipoTres);

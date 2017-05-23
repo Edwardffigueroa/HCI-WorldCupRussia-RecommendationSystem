@@ -55,7 +55,6 @@ public class Maleta {
         dineroPartidos+=p.getCosto();
 
         String[] fecha =p.getFecha().split("/");
-
         dia= Integer.parseInt(fecha[0]);
 
         System.out.println(dia);
@@ -71,7 +70,6 @@ public class Maleta {
         }else{
             return false;
         }
-
     }
 
     public void showData() {
@@ -125,4 +123,7 @@ public class Maleta {
 
     }
 
+    public PVector getPos() {
+        return pos;
+    }
 }

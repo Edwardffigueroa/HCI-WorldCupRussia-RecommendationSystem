@@ -24,13 +24,25 @@ public class PartidoRecomendado {
         User uno=usuarios.get(0);
         User dos=usuarios.get(1);
         User tres= usuarios.get(2);
-       // User cuatro= usuarios.get(3);
+        //User cuatro= usuarios.get(3);
+        //User cinco= usuarios.get(4);
+        //User seis= usuarios.get(5);
+        //User siete= usuarios.get(6);
+        //User ocho= usuarios.get(7);
+        //User nueve= usuarios.get(8);
+        //User diez= usuarios.get(9);
 
+        //Collection<String> interna= getIntersection(uno.getEquipos(),dos.getEquipos());
         Collection<String> interna= getIntersection(uno.getEquipos(),dos.getEquipos(), tres.getEquipos());
+        //Collection<String> interna= getIntersection(uno.getEquipos(),dos.getEquipos(), tres.getEquipos(), cuatro.getEquipos());
+        //Collection<String> interna= getIntersection(uno.getEquipos(),dos.getEquipos(), tres.getEquipos(), cuatro.getEquipos(),cinco.getEquipos());
+        //Collection<String> interna= getIntersection(uno.getEquipos(),dos.getEquipos(), tres.getEquipos(), cuatro.getEquipos(),cinco.getEquipos(),seis.getEquipos());
+        //Collection<String> interna= getIntersection(uno.getEquipos(),dos.getEquipos(), tres.getEquipos(), cuatro.getEquipos(),cinco.getEquipos(),seis.getEquipos(), siete.getEquipos());
+        //Collection<String> interna= getIntersection(uno.getEquipos(),dos.getEquipos(), tres.getEquipos(), cuatro.getEquipos(),cinco.getEquipos(),seis.getEquipos(), siete.getEquipos(), ocho.getEquipos());
+        //Collection<String> interna= getIntersection(uno.getEquipos(),dos.getEquipos(), tres.getEquipos(), cuatro.getEquipos(),cinco.getEquipos(),seis.getEquipos(), siete.getEquipos(), ocho.getEquipos(), nueve.getEquipos());
+        //Collection<String> interna= getIntersection(uno.getEquipos(),dos.getEquipos(), tres.getEquipos(), cuatro.getEquipos(),cinco.getEquipos(),seis.getEquipos(), siete.getEquipos(), ocho.getEquipos(), nueve.getEquipos(), diez.getEquipos());
 
         interseccion.addAll(interna);
-
-
 
         for (int i = 0; i <interseccion.size() ; i++) {
             System.out.println("Equipos en común: "+interseccion.get(i));
@@ -55,8 +67,6 @@ public class PartidoRecomendado {
             }
 
         }
-
-
 
 
     }

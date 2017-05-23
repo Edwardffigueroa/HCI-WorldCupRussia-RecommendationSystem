@@ -17,6 +17,7 @@ import java.util.Observer;
 public class Logic implements Observer{
 
     private static int NUMERO_JUGADORES=3;
+    private  int pantallas=1;
     private PApplet app;
     private Workbook workbook;
     private Sheet[] mySheets;
@@ -28,12 +29,13 @@ public class Logic implements Observer{
 
     private LabelCell myLabel;
     private NumberCell myNumber;
+    private DateCell myDate;
 
     private String equipoUno="";
     private String equipoDos="";
     private String  ciudad="";
     private String  fecha="";
-    private String  hora="";
+    private String  horas="";
     private int  costo=0;
     private String  grupo="";
 
@@ -54,8 +56,8 @@ public class Logic implements Observer{
 
     private PImage back;
     private PImage start;
-    private  int pantallas;
-
+    private PImage bag;
+    private  PImage finish;
 
 
 
@@ -66,6 +68,8 @@ public class Logic implements Observer{
         maleta= new Maleta(app);
         back= app.loadImage("data/fondo.jpg");
         start=app.loadImage("data/pantallaUno.jpg");
+        bag= app.loadImage("data/partidosMaleta.png");
+        finish=app.loadImage("data/pantallaFinal.jpg");
 
         manager= new ManagerComunicacion(app);
         manager.addObserver(this);
@@ -87,8 +91,8 @@ public class Logic implements Observer{
 
     public void initUsers(){
 
-       // usuarios.add(new User("asdas","COL", "MEX","CHL","ESP"));
-      //  usuarios.add(new User("asdasd","COL", "URY","CHL","ESP"));
+    //    usuarios.add(new User("asdas","COL", "MEX","CHL","ESP"));
+  //      usuarios.add(new User("asdasd","COL", "URY","CHL","ESP"));
 //        usuarios.add(new User("asdasd","COL", "GRC","KOR","ESP"));
 
     }
@@ -133,12 +137,14 @@ public class Logic implements Observer{
                     if (i==3&&j>-1){
                         fecha= myLabel.getString();
 
-                    }
-
-                    if(i==4&&j>-1) {
-                        hora= myLabel.getString();
 
                     }
+
+                    /*if(i==4&&j>-1) {
+                        horas= myLabel.getString();
+
+
+                    }*/
 
                     if (i==6&&j>-1){
                         grupo= myLabel.getString();
@@ -157,6 +163,13 @@ public class Logic implements Observer{
 
                 }
 
+                if (myCell.getType()==CellType.DATE){
+                    myDate=(DateCell) myCell;
+                    if(i==4&&j>-1) {
+                        horas= myDate.getContents();
+                    }
+                }
+
             }
 
             px = (app.width/3)-30 + app.cos(app.radians(angle))*(radius);
@@ -165,7 +178,7 @@ public class Logic implements Observer{
             rotationAngle= j*(app.TWO_PI/49);
 
 
-            p= new Partido(equipoUno,equipoDos,ciudad,fecha,hora,costo,grupo, new PVector(px,py), j,rotationAngle, app);
+            p= new Partido(equipoUno,equipoDos,ciudad,fecha,horas,costo,grupo, new PVector(px,py), j,rotationAngle, app);
             partidos.add(p);
 
             angle= (float) (j*7.5);
@@ -186,7 +199,9 @@ public class Logic implements Observer{
 
     public void pintar(){
 
-        switch (1){
+        app.image(back, 0,0, app.width, app.height);
+
+        switch (pantallas){
             case 0:
                 app.image(start,0,0,app.width, app.height);
                 app.textSize(24);
@@ -205,9 +220,15 @@ public class Logic implements Observer{
                     p.pintar();
                 }
                 break;
+
             case 2:
+
+                app.image(bag, 0,0, app.width, app.height);
+
                 break;
             case 3:
+                app.image(finish, 0,0, app.width,app.height);
+
                 break;
 
         }
@@ -229,6 +250,22 @@ public class Logic implements Observer{
 
     public void pressed(){
         coger();
+
+        if (app.dist(maleta.getPos().x, maleta.getPos().y,app.mouseX, app.mouseY)<125&&pantallas==1){
+            pantallas=2;
+        }
+        if (app.mouseX>319&&app.mouseX<472&&app.mouseY>560&&app.mouseY<596&&pantallas==2){
+            pantallas=1;
+        }
+
+        if (app.mouseX>878&&app.mouseX<1098&&app.mouseY>697&&app.mouseY<748&&pantallas==1){
+            pantallas=3;
+        }
+
+        if (app.mouseX>59&&app.mouseX<202&&app.mouseY>610&&app.mouseY<782&&pantallas==3){
+            pantallas=1;
+        }
+
     }
 
 
@@ -273,7 +310,5 @@ public class Logic implements Observer{
         recomendacion.partidosIdeales();
 
         }
-
-
     }
 }
