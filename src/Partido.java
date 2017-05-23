@@ -1,4 +1,6 @@
 import processing.core.PApplet;
+import processing.core.PConstants;
+import processing.core.PImage;
 import processing.core.PVector;
 
 /**
@@ -16,7 +18,11 @@ public class Partido {
     String grupo;
 
     //GRAPHICS
-    PVector pos;
+    PVector pose;
+    PVector posDestino;
+
+    float vel;
+    private float z = 0; // create variable for noise z
 
     float ancho;
     float alto;
@@ -26,6 +32,12 @@ public class Partido {
     private boolean info=false;
     private boolean aceptable=false;
     private boolean ideal=false;
+
+    private PImage boleta;
+    private PImage boletaIdeal;
+    private PImage boletaAceptable;
+
+
 
     public Partido(String equipoUno, String equipoDos, String ciudad, String fecha, String hora, int costo, String grupo, PVector pos, int id, float rotationAngle, PApplet app) {
 
@@ -37,14 +49,25 @@ public class Partido {
         this.costo=costo;
         this.grupo=grupo;
             //graphics
-        this.pos=pos;
+       // this.pos=pos;
         this.id=id;
         this.rotationAngle=rotationAngle;
         this.app=app;
 
+        this.posDestino=pos;
+
+       pose= new PVector((app.width/3)-30,app.height/2 );
+      //  pose= new PVector(0,0 );
+
+        boleta= app.loadImage("data/tiqueteGris.png");
+        boletaIdeal= app.loadImage("data/tiqueteAmarillo.png");
+        boletaAceptable= app.loadImage("data/tiqueteAzul.png");
 
         ancho=80;
         alto=30;
+
+        //vel= (float) 15.29;
+        vel= (float) 20.25;
 
     }
 
@@ -53,39 +76,87 @@ public class Partido {
 
         app.pushMatrix();
 
-        app.translate(pos.x, pos.y);
+        app.translate(pose.x, pose.y);
         app.rotate(rotationAngle);
         app.fill(0);
 
+        app.imageMode(app.CENTER);
+        app.image(boleta, 0,0, 94-8, 47-8);
+
         if (aceptable){
-            app.fill(0,0,255);
+
+            app.image(boletaIdeal, 0,0);
         }
         if (ideal){
-            app.fill(0,255,0);
+            app.image(boletaAceptable, 0,0);
         }
-        app.rect(0,0,ancho, alto);
-        app.fill(255);
-        app.text(equipoUno+"vs"+equipoDos,0,0+(alto/2));
+
+        app.imageMode(app.CORNER);
+
+
+        app.fill(0);
+        app.textSize(10);
+        app.textMode(PConstants.CENTER);
+
+        app.text(equipoUno+" vs "+equipoDos,-38,0);
+
         app.popMatrix();
 
-        // ellipseMode(CORNER);
-        app.ellipse(pos.x,pos.y,alto,alto);
+            //prueba area sensible
+        app.noFill();
+        app.ellipse(pose.x, pose.y, alto,alto);
 
-   /*if(mouseX>pos.x&&mouseX<pos.x+ancho&&mouseY>pos.y&&mouseY<pos.y+alto){
-     fill(0);
-     rect(pos.x, pos.y, ancho, alto);
-    }*/
+
+//----------------------------------------
+        if(app.dist(app.mouseX, app.mouseY, pose.x, pose.y)<alto/2){ //MOSTRAR INFORMACIÓN
+
+            app.pushMatrix();
+            app.translate(pose.x, pose.y);
+            app.rotate(rotationAngle);
+
+        app.fill(0);
+        app.rectMode(app.CENTER);
+        app.rect(-100, 0, ancho, alto);
+        app.fill(255);
+        app.text("info", -100,15);
+
+        app.popMatrix();
+    }
+
+
+        animacion();
+      //  z = (float) (z + 0.02);
+    }
+
+
+    public void animacion(){
+
+        if(pose.x<=posDestino.x){
+            pose.x+=vel*0.50;
+        }
+
+        if(pose.x>=posDestino.x){
+            pose.x-=vel*0.50;
+        }
+
+        if(pose.y<=posDestino.y){
+            pose.y+=vel*0.50;
+        }
+        if(pose.y>=posDestino.y){
+            pose.y-=vel*0.50;
+        }
+
 
     }
 
 
     public void arrastrar(float posX, float posY){
-        pos.x= posX;
-        pos.y= posY;
+        pose.x= posX;
+        pose.y= posY;
     }
 
     public boolean agarrar(){
-        if(app.dist(app.mouseX, app.mouseY, pos.x, pos.y)<25){
+        if(app.dist(app.mouseX, app.mouseY, pose.x, pose.y)<alto/2){
             info=true;
             return true;
         }else{
@@ -104,7 +175,7 @@ public class Partido {
     }
 
     public PVector getPos(){
-        return pos;
+        return pose;
     }
 
 

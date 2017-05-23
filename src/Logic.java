@@ -40,13 +40,14 @@ public class Logic {
     private ArrayList<Partido> partidos;
     private ArrayList<User> usuarios;
     private PartidoRecomendado recomendacion;
+    private ManagerComunicacion manager;
 
     //variables para la pintada
     float rotationAngle;
     float px, py;
     float angle=353;
     //float radius = 320;
-    float radius = 290;
+    float radius = 320;
 
     private PImage back;
 
@@ -57,10 +58,10 @@ public class Logic {
         usuarios= new ArrayList<User>();
         maleta= new Maleta(app);
         back= app.loadImage("data/fondo.jpg");
+        manager= new ManagerComunicacion(app);
+        new Thread(manager).start();
 
         initUsers();
-
-
 
         try {
             readData();
@@ -107,18 +108,16 @@ public class Logic {
                     myLabel=(LabelCell) myCell;
 
                     if (i==0&&j>0) {
-                        equipoUno= myLabel.getString();
 
+                        equipoUno= myLabel.getString();
                     }
 
                     if (i==1&&j>0){
                         equipoDos=myLabel.getString();
-
                     }
 
                     if (i==2&&j>0){
                         ciudad= myLabel.getString();
-
                     }
 
                     if (i==3&&j>0){
@@ -165,10 +164,10 @@ public class Logic {
 
         }
 
+
         for (int j = 0; j <partidos.size() ; j++) {
             Partido p= partidos.get(j);
             System.out.println(p.equipoUno+"vs"+p.equipoDos+":"+ciudad+":"+fecha+":"+hora+":"+costo+":"+grupo);
-
         }
 
        System.out.println(mySheets[numberSheet].getRows());
