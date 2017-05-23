@@ -23,8 +23,9 @@ public class ManagerComunicacion extends Observable implements Observer, Runnabl
     PApplet app;
     private String code="";
 
-    public ManagerComunicacion(PApplet app) {
+    public ManagerComunicacion(PApplet app, String code) {
         this.app=app;
+        this.code=code;
 
         try {
             socketServidor = new ServerSocket(PORT);
@@ -34,7 +35,7 @@ public class ManagerComunicacion extends Observable implements Observer, Runnabl
         } catch (IOException e) {
             e.printStackTrace();
         }
-        cod();
+        //cod();
     }
 
     @Override
@@ -110,18 +111,7 @@ public class ManagerComunicacion extends Observable implements Observer, Runnabl
         }
     }
 
-    public void cod(){
 
-        char[] chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890".toCharArray();
-        StringBuilder sb = new StringBuilder();
-        Random random = new Random();
-        for (int i = 0; i < 6; i++) {
-            char c = chars[random.nextInt(chars.length)];
-            sb.append(c);
-        }
-        code = sb.toString();
-        System.out.println("Código: " + code);
-    }
 
     public void pintar(){
         app.textSize(30);

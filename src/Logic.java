@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.Random;
 
 /**
  * Created by edward on 10/05/17.
@@ -17,14 +18,14 @@ import java.util.Observer;
 public class Logic implements Observer{
 
     private static int NUMERO_JUGADORES=3;
-    private  int pantallas=1;
+    private  int pantallas=0;
     private PApplet app;
     private Workbook workbook;
     private Sheet[] mySheets;
+
     //private String inputFile = "data/partidos.xls";
     private String inputFile = "data/PartidosNew.xls";
     private int numberSheet=0;
-
     private Cell myCell;// este se encarga de tomar el dato de la celda
 
     private LabelCell myLabel;
@@ -59,19 +60,20 @@ public class Logic implements Observer{
     private PImage bag;
     private  PImage finish;
 
+    private String code="";
 
 
     public Logic(PApplet app) {
         this.app=app;
         partidos= new ArrayList<Partido>();
         usuarios= new ArrayList<User>();
-        maleta= new Maleta(app);
+        maleta= new Maleta(app, this);
         back= app.loadImage("data/fondo.jpg");
         start=app.loadImage("data/pantallaUno.jpg");
         bag= app.loadImage("data/partidosMaleta.png");
         finish=app.loadImage("data/pantallaFinal.jpg");
-
-        manager= new ManagerComunicacion(app);
+        cod();
+        manager= new ManagerComunicacion(app, code);
         manager.addObserver(this);
         new Thread(manager).start();
 
@@ -86,6 +88,8 @@ public class Logic implements Observer{
         /*recomendacion= new PartidoRecomendado(partidos,usuarios);
         recomendacion.partidosAceptables();
         recomendacion.partidosIdeales();*/
+
+
 
     }
 
@@ -177,7 +181,6 @@ public class Logic implements Observer{
 
             rotationAngle= j*(app.TWO_PI/49);
 
-
             p= new Partido(equipoUno,equipoDos,ciudad,fecha,horas,costo,grupo, new PVector(px,py), j,rotationAngle, app);
             partidos.add(p);
 
@@ -188,10 +191,10 @@ public class Logic implements Observer{
         }
 
 
-        for (int k = 0; k <partidos.size() ; k++) {
+        /*for (int k = 0; k <partidos.size() ; k++) {
             Partido p= partidos.get(k);
             System.out.println(p.getEquipoUno()+"vs"+p.getEquipoDos()+":"+p.getCiudad()+":"+p.getFecha()+":"+p.getHora()+":"+p.getCosto()+":"+p.getGrupo());
-        }
+        }*/
 
        System.out.println(mySheets[numberSheet].getRows());
 
@@ -228,6 +231,7 @@ public class Logic implements Observer{
                 break;
             case 3:
                 app.image(finish, 0,0, app.width,app.height);
+                maleta.showDataOnFinish();
 
                 break;
 
@@ -310,5 +314,27 @@ public class Logic implements Observer{
         recomendacion.partidosIdeales();
 
         }
+    }
+
+
+    public void cod(){
+
+        char[] chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890".toCharArray();
+        StringBuilder sb = new StringBuilder();
+        Random random = new Random();
+        for (int i = 0; i < 6; i++) {
+            char c = chars[random.nextInt(chars.length)];
+            sb.append(c);
+        }
+        code = sb.toString();
+        System.out.println("Código: " + code);
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public static int getNumeroJugadores() {
+        return NUMERO_JUGADORES;
     }
 }

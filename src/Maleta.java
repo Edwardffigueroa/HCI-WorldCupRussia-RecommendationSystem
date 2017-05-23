@@ -30,9 +30,12 @@ public class Maleta {
 
     private TreeSet<Integer> noDias= new TreeSet<Integer>();
     private TreeSet<String> noVuelos= new TreeSet<String>();
+    private Logic log;
 
-    Maleta(PApplet app){
+    Maleta(PApplet app, Logic log){
+
         this.app=app;
+        this.log=log;
 
         pos= new PVector((app.width/3)-30,app.height/2);
         partidos= new ArrayList<Partido>();
@@ -117,6 +120,44 @@ public class Maleta {
         app.text("Total: $ "+total, 874,612);
 
         //}
+    }
+
+    public void showDataOnFinish(){
+//lapso de tiempo
+
+        app.textSize(15);
+        app.fill(0);
+        app.text(diaMenor+"-"+diaMayor, 330,312);
+
+        //code
+
+        app.textSize(15);
+        app.fill(0);
+        app.text(log.getCode(),747,312);
+
+        //numero de jugadores
+        app.textSize(15);
+        app.fill(0);
+        app.text(log.getNumeroJugadores(),311,444);
+
+        //precio total de la compra
+
+        app.textSize(15);
+        app.fill(0);
+        app.text(total,688,441);
+
+
+        //PARTIDOS A LOS QUE SE IRAN
+
+        for (int i = 0; i <partidos.size() ; i++) {
+            Partido p= partidos.get(i);
+
+        app.textSize(15);
+        app.fill(0);
+        app.text(p.getEquipoUno() +" vs "+p.getEquipoDos(),947,312+(i*20));
+
+        }
+
     }
 
     public void removePartido(){
