@@ -6,12 +6,14 @@ import java.util.ArrayList;
 public class User {
 
     private ArrayList<java.lang.String> equipos;
+    String nombreUsuario;
     String equipoUno;
     String equipoDos;
     String equipoTres;
     String equipoCuatro;
 
-    public User(String equipoUno, String equipoDos, String equipoTres, String equipoCuatro) {
+    public User(String nombreUsuario,String equipoUno, String equipoDos, String equipoTres, String equipoCuatro) {
+        this.nombreUsuario=nombreUsuario;
         this.equipoUno=equipoUno;
         this.equipoDos=equipoDos;
         this.equipoTres=equipoTres;
@@ -35,6 +37,10 @@ public class User {
 
             return equipoUno+":"+equipoDos+":"+equipoTres+":"+equipoCuatro;
 
+    }
+
+    public String getNombreUsuario() {
+        return nombreUsuario;
     }
 
     public String getEquipoUno() {

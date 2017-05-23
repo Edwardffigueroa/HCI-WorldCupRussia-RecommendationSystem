@@ -13,7 +13,7 @@ import java.util.Random;
 
 import processing.core.PApplet;
 
-public class ManagerComunicacion implements Observer, Runnable {
+public class ManagerComunicacion extends Observable implements Observer, Runnable {
 
     private final int PORT = 5000;
     private ServerSocket socketServidor;
@@ -72,6 +72,7 @@ public class ManagerComunicacion implements Observer, Runnable {
 
         if (msn instanceof String) {
 
+            String user= "";
             String mensaje = (String) msn;
             System.out.println(mensaje);
 
@@ -80,19 +81,31 @@ public class ManagerComunicacion implements Observer, Runnable {
                 System.out.println("[Servidor] Tenemos: " + clientes.size() + " clientes");
             }
 
-            if (mensaje.contains("codigo")){
-                System.out.println("Welcome to the jungle");
+            if (mensaje.contains("codigo")){ //validacion
+             //   System.out.println("Welcome to the jungle");
                 String[] partes = mensaje.split(":");
+
+                user=partes[1];
 
                 if (partes[2].contains(code)){
 
-                    System.out.println("CÓDIGO ACEPTADO");
+                   // System.out.println("CÓDIGO ACEPTADO");
                     controladorCliente.enviarMensaje("CÓDIGO ACEPTADO");
-
 
                 }
 
             }
+                //aqui va la creación del objeto
+
+            if (mensaje.contains("datos")){
+                String[] partes = mensaje.split(":");
+
+                User u= new User(user, partes[1],partes[2], partes[3], partes[4]);
+                setChanged();
+                notifyObservers(u);
+            }
+
+
 
         }
     }

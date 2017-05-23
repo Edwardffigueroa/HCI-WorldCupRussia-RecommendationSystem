@@ -24,7 +24,7 @@ public class Main extends PApplet {
     public void settings()
     {
      //   size(1000,800);
-        fullScreen();
+       fullScreen();
     }
 
     @Override
@@ -52,6 +52,7 @@ public class Main extends PApplet {
     @Override
     public void mousePressed() {
         log.pressed();
+        System.out.println(mouseX+","+mouseY);
     }
 
     @Override

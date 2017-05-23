@@ -84,11 +84,11 @@ public class Partido {
         app.image(boleta, 0,0, 94-8, 47-8);
 
         if (aceptable){
-
-            app.image(boletaIdeal, 0,0);
-        }
-        if (ideal){
             app.image(boletaAceptable, 0,0);
+        }
+
+        if (ideal){
+            app.image(boletaIdeal, 0,0);
         }
 
         app.imageMode(app.CORNER);
@@ -96,7 +96,7 @@ public class Partido {
 
         app.fill(0);
         app.textSize(10);
-        app.textMode(PConstants.CENTER);
+//        app.textMode(PConstants.CENTER);
 
         app.text(equipoUno+" vs "+equipoDos,-38,0);
 

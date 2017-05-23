@@ -7,13 +7,16 @@ import processing.core.PVector;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Observable;
+import java.util.Observer;
 
 /**
  * Created by edward on 10/05/17.
  */
 
-public class Logic {
+public class Logic implements Observer{
 
+    private static int NUMERO_JUGADORES=3;
     private PApplet app;
     private Workbook workbook;
     private Sheet[] mySheets;
@@ -50,6 +53,10 @@ public class Logic {
     float radius = 320;
 
     private PImage back;
+    private PImage start;
+    private  int pantallas;
+
+
 
 
     public Logic(PApplet app) {
@@ -58,7 +65,10 @@ public class Logic {
         usuarios= new ArrayList<User>();
         maleta= new Maleta(app);
         back= app.loadImage("data/fondo.jpg");
+        start=app.loadImage("data/pantallaUno.jpg");
+
         manager= new ManagerComunicacion(app);
+        manager.addObserver(this);
         new Thread(manager).start();
 
         initUsers();
@@ -69,17 +79,17 @@ public class Logic {
             e.printStackTrace();
         }
 
-        recomendacion= new PartidoRecomendado(partidos,usuarios);
+        /*recomendacion= new PartidoRecomendado(partidos,usuarios);
         recomendacion.partidosAceptables();
-        recomendacion.partidosIdeales();
+        recomendacion.partidosIdeales();*/
 
     }
 
     public void initUsers(){
 
-        usuarios.add(new User("COL", "MEX","CHL","ESP"));
-        usuarios.add(new User("COL", "URY","CHL","ESP"));
-        usuarios.add(new User("COL", "GRC","KOR","ESP"));
+       // usuarios.add(new User("asdas","COL", "MEX","CHL","ESP"));
+      //  usuarios.add(new User("asdasd","COL", "URY","CHL","ESP"));
+//        usuarios.add(new User("asdasd","COL", "GRC","KOR","ESP"));
 
     }
 
@@ -107,30 +117,30 @@ public class Logic {
 
                     myLabel=(LabelCell) myCell;
 
-                    if (i==0&&j>0) {
+                    if (i==0&&j>-1) {
 
                         equipoUno= myLabel.getString();
                     }
 
-                    if (i==1&&j>0){
+                    if (i==1&&j>-1){
                         equipoDos=myLabel.getString();
                     }
 
-                    if (i==2&&j>0){
+                    if (i==2&&j>-1){
                         ciudad= myLabel.getString();
                     }
 
-                    if (i==3&&j>0){
+                    if (i==3&&j>-1){
                         fecha= myLabel.getString();
 
                     }
 
-                    if(i==4&&j>0) {
+                    if(i==4&&j>-1) {
                         hora= myLabel.getString();
 
                     }
 
-                    if (i==6&&j>0){
+                    if (i==6&&j>-1){
                         grupo= myLabel.getString();
 
                     }
@@ -141,7 +151,7 @@ public class Logic {
 
                     myNumber=(NumberCell) myCell;
 
-                    if (i==5&&j>0) {
+                    if (i==5&&j>-1) {
                         costo = (int) myNumber.getValue();
                     }
 
@@ -165,9 +175,9 @@ public class Logic {
         }
 
 
-        for (int j = 0; j <partidos.size() ; j++) {
-            Partido p= partidos.get(j);
-            System.out.println(p.equipoUno+"vs"+p.equipoDos+":"+ciudad+":"+fecha+":"+hora+":"+costo+":"+grupo);
+        for (int k = 0; k <partidos.size() ; k++) {
+            Partido p= partidos.get(k);
+            System.out.println(p.getEquipoUno()+"vs"+p.getEquipoDos()+":"+p.getCiudad()+":"+p.getFecha()+":"+p.getHora()+":"+p.getCosto()+":"+p.getGrupo());
         }
 
        System.out.println(mySheets[numberSheet].getRows());
@@ -176,15 +186,34 @@ public class Logic {
 
     public void pintar(){
 
-        //System.out.println(partidos.size());
-        app.image(back, 0,0, app.width, app.height);
+        switch (1){
+            case 0:
+                app.image(start,0,0,app.width, app.height);
+                app.textSize(24);
+                app.text(manager.getCode(),630,368);
 
-        maleta.pintar();
+                app.text(usuarios.size()+"/"+NUMERO_JUGADORES,800,368);
 
-        for (int i = 0; i <partidos.size() ; i++) {
-            Partido p= partidos.get(i);
-            p.pintar();
+                break;
+            case 1:
+                app.image(back, 0,0, app.width, app.height);
+
+                maleta.pintar();
+
+                for (int i = 0; i <partidos.size() ; i++) {
+                    Partido p= partidos.get(i);
+                    p.pintar();
+                }
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+
         }
+
+        //System.out.println(partidos.size());
+
     }
 
     public void coger(){
@@ -225,5 +254,26 @@ public class Logic {
     }
 
 
+    @Override
+    public void update(Observable o, Object arg) {
 
+        if (arg instanceof User){
+            usuarios.add((User) arg);
+            System.out.println(usuarios.size());
+            System.out.println(((User) arg).getNombreUsuario()+":"+((User) arg).getEquipoUno()+":"+((User) arg).getEquipoDos()+":"+((User) arg).getEquipoTres()+":"+((User) arg).getEquipoCuatro());
+
+        }
+
+        if(usuarios.size()==NUMERO_JUGADORES){
+
+            pantallas=1;
+
+        recomendacion= new PartidoRecomendado(partidos,usuarios);
+        recomendacion.partidosAceptables();
+        recomendacion.partidosIdeales();
+
+        }
+
+
+    }
 }
