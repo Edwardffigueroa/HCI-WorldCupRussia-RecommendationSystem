@@ -54,9 +54,9 @@ public class Partido {
         this.rotationAngle=rotationAngle;
         this.app=app;
 
-        this.posDestino=pos;
+        this.pose=pos;
 
-       pose= new PVector((app.width/3)-30,app.height/2 );
+    //   pose= new PVector((app.width/3)-30,app.height/2 );
       //  pose= new PVector(0,0 );
 
         boleta= app.loadImage("data/tiqueteGris.png");
@@ -130,7 +130,7 @@ public class Partido {
     }
 
 
-        animacion();
+     //   animacion();
       //  z = (float) (z + 0.02);
     }
 

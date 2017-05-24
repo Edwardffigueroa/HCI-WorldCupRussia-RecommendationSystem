@@ -17,8 +17,9 @@ import java.util.Random;
 
 public class Logic implements Observer{
 
-    private static int NUMERO_JUGADORES=3;
-    private  int pantallas=0;
+    private static int NUMERO_JUGADORES=2;
+    private  int pantallas=1;
+    //private int mapeo=200;
     private PApplet app;
     private Workbook workbook;
     private Sheet[] mySheets;
@@ -88,8 +89,6 @@ public class Logic implements Observer{
         /*recomendacion= new PartidoRecomendado(partidos,usuarios);
         recomendacion.partidosAceptables();
         recomendacion.partidosIdeales();*/
-
-
 
     }
 
@@ -206,11 +205,12 @@ public class Logic implements Observer{
 
         switch (pantallas){
             case 0:
+
                 app.image(start,0,0,app.width, app.height);
                 app.textSize(24);
-                app.text(manager.getCode(),630,368);
+                app.text(manager.getCode(),900,500);
 
-                app.text(usuarios.size()+"/"+NUMERO_JUGADORES,800,368);
+                app.text(usuarios.size()+"/"+NUMERO_JUGADORES,900,600);
 
                 break;
             case 1:
@@ -255,18 +255,21 @@ public class Logic implements Observer{
     public void pressed(){
         coger();
 
+        //ZONA SENSIBLE PARA VER PARTIDOS
         if (app.dist(maleta.getPos().x, maleta.getPos().y,app.mouseX, app.mouseY)<125&&pantallas==1){
             pantallas=2;
         }
-        if (app.mouseX>319&&app.mouseX<472&&app.mouseY>560&&app.mouseY<596&&pantallas==2){
+
+        //ZONA SENSIBLE PARA SALIR DE LA OPCION DE VER LOS PARTIDOS
+        if (app.mouseX>481&&app.mouseX<705&&app.mouseY>757&&app.mouseY<804&&pantallas==2){
             pantallas=1;
         }
-
-        if (app.mouseX>878&&app.mouseX<1098&&app.mouseY>697&&app.mouseY<748&&pantallas==1){
+        //ZONA SENSIBLE PARA PASAR A LA PANTALLA FINAL
+        if (app.mouseX>1315&&app.mouseX<1643&&app.mouseY>938&&app.mouseY<1010&&pantallas==1){
             pantallas=3;
         }
-
-        if (app.mouseX>59&&app.mouseX<202&&app.mouseY>610&&app.mouseY<782&&pantallas==3){
+        //ZONA SENSIBLE PARA REGRESAR
+        if (app.mouseX>88&&app.mouseX<316&&app.mouseY>831&&app.mouseY<1047&&pantallas==3){
             pantallas=1;
         }
 

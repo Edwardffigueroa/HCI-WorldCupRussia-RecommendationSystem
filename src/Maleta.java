@@ -87,37 +87,37 @@ public class Maleta {
             numeroPartidos=partidos.size();
             dias=noDias.size();
             numeroVuelos=noVuelos.size();
-            dineroVuelos=numeroVuelos*150000;
-            total=dineroVuelos+dineroPartidos;
+            dineroVuelos=(numeroVuelos*150000)*log.getNumeroJugadores();
+            total=(dineroVuelos+dineroPartidos)*log.getNumeroJugadores();
 
             app.textSize(15);
             app.fill(255);
-            app.text(numeroPartidos+" Partidos", 874,479);
+            app.text(numeroPartidos+" Partidos", 1316,659);
             //dinero en partidos
             app.textSize(15);
             app.fill(255);
-            app.text("$ "+dineroPartidos, 1000,479);
+            app.text("$ "+dineroPartidos*log.getNumeroJugadores(), 1509,659);
             //numero de dias (debería restar el dia mayor y el día menor)
             app.textSize(15);
             app.fill(255);
-            app.text(dias+" Días", 869,419);
+            app.text(dias+" Días", 1309,576);
             //lapso de tiempo
             app.textSize(15);
             app.fill(255);
-            app.text(diaMenor+"-"+diaMayor, 1000,419);
+            app.text(diaMenor+"-"+diaMayor, 1509,576);
         //numero de vuelos
         app.textSize(15);
         app.fill(255);
-        app.text(numeroVuelos+" Vuelos", 870,537);
+        app.text(numeroVuelos+" Vuelos", 1324,736);
         //precio de vuelos
         app.textSize(15);
         app.fill(255);
-        app.text("$ "+dineroVuelos, 1000,537);
+        app.text("$ "+dineroVuelos, 1509,736);
 
         //precio total
         app.textSize(15);
         app.fill(255);
-        app.text("Total: $ "+total, 874,612);
+        app.text("Total: $ "+total, 1318,836);
 
         //}
     }
@@ -125,26 +125,26 @@ public class Maleta {
     public void showDataOnFinish(){
 //lapso de tiempo
 
-        app.textSize(15);
+        app.textSize(28);
         app.fill(0);
-        app.text(diaMenor+"-"+diaMayor, 330,312);
+        app.text(diaMenor+"-"+diaMayor, 530,430);
 
         //code
 
-        app.textSize(15);
+        app.textSize(28);
         app.fill(0);
-        app.text(log.getCode(),747,312);
+        app.text(log.getCode(),1158,430);
 
         //numero de jugadores
-        app.textSize(15);
+        app.textSize(28);
         app.fill(0);
-        app.text(log.getNumeroJugadores(),311,444);
+        app.text(log.getNumeroJugadores(),531,587);
 
         //precio total de la compra
 
-        app.textSize(15);
+        app.textSize(28);
         app.fill(0);
-        app.text(total,688,441);
+        app.text(total,1092,587);
 
 
         //PARTIDOS A LOS QUE SE IRAN
@@ -152,9 +152,9 @@ public class Maleta {
         for (int i = 0; i <partidos.size() ; i++) {
             Partido p= partidos.get(i);
 
-        app.textSize(15);
+        app.textSize(28);
         app.fill(0);
-        app.text(p.getEquipoUno() +" vs "+p.getEquipoDos(),947,312+(i*20));
+        app.text(p.getEquipoUno() +" vs "+p.getEquipoDos(),1458,430+(i*30));
 
         }
 

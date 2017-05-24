@@ -39,7 +39,7 @@ public class Main extends PApplet {
         code = sb.toString();
      //   System.out.println(code);
         //smooth();
-
+        noCursor();
     }
 
     @Override
