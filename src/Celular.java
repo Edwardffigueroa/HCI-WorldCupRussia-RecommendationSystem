@@ -12,6 +12,8 @@ public class Celular extends Observable {
     private String nombreUser="";
     private ArrayList<EquipoSeleccionado> equipos;
     private PApplet app;
+    int x, y;
+
     private int posXInputUno=250;
     private int posYInputUno=250;
 
@@ -39,12 +41,33 @@ public class Celular extends Observable {
     private boolean sendTres=false;
     private boolean sendCuatro=false;
 
+    private boolean enviado=false;
+
     private String equiposUno="";
     private String equiposDos="";
     private String equipostres="";
     private String equiposCuatro="";
 
-    public Celular(PApplet app,String user ) {
+    public Celular(PApplet app,String user , int x, int y) {
+        this.x=x;
+        this.y=y;
+
+        posXInputUno=x+50;
+        posYInputUno=y+50;
+
+        posXInputDos=x+50;
+        posYInputDos=y+100;
+
+        posXInputTres=x+50;
+        posYInputTres=y+150;
+
+        posXInputCuatro=x+50;
+        posYInputCuatro=y+200;
+
+        posXbuttonsend=x+0;
+        posYbuttonsend=y+250;
+
+
 this.app=app;
         this.nombreUser=user;
         equipos= new ArrayList<EquipoSeleccionado>();
@@ -126,8 +149,10 @@ this.app=app;
 
     public void pintar(){
 
+
+
         app.fill(255);
-        app.rect(200,200,200,300);
+        app.rect(x,y,200,300);
 
 
         //boton de enviar
@@ -186,7 +211,12 @@ this.app=app;
             }
         }
 
-
+        if(enviado){
+            app.fill(0, 98);
+            app.rect(x,y,200,300);
+            app.fill(255);
+            app.text("wait", x+100, y+100);
+        }
 
 
 
@@ -266,6 +296,7 @@ this.app=app;
                  User u = new User(nombreUser, equiposUno, equiposDos, equipostres, equiposCuatro);
                  setChanged();
                  notifyObservers(u);
+                 enviado=true;
              }
         }
 

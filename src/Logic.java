@@ -91,7 +91,7 @@ public class Logic implements Observer{
             e.printStackTrace();
         }
 
-        phone = new Celular(app,"user uno");
+        phone = new Celular(app,"user uno", 200,200);
         phone.addObserver(this);
 
        // recomendacion= new PartidoRecomendado(partidos,usuarios);
