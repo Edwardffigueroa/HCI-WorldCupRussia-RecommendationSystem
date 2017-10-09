@@ -55,7 +55,7 @@ public class Partido {
         this.app=app;
 
         this.pose=pos;
-
+    //this.posDestino=pos;
     //   pose= new PVector((app.width/3)-30,app.height/2 );
       //  pose= new PVector(0,0 );
 
@@ -130,8 +130,8 @@ public class Partido {
     }
 
 
-     //   animacion();
-      //  z = (float) (z + 0.02);
+      //  animacion();
+        //z = (float) (z + 0.02);
     }
 
 

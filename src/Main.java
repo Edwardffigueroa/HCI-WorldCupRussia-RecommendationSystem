@@ -23,8 +23,8 @@ public class Main extends PApplet {
     @Override
     public void settings()
     {
-     //   size(1000,800);
-       fullScreen();
+        size(1280,800);
+        //fullScreen();
     }
 
     @Override
@@ -39,7 +39,7 @@ public class Main extends PApplet {
         code = sb.toString();
      //   System.out.println(code);
         //smooth();
-        noCursor();
+        //noCursor();
     }
 
     @Override

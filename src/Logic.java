@@ -18,7 +18,7 @@ import java.util.Random;
 public class Logic implements Observer{
 
     private static int NUMERO_JUGADORES=2;
-    private  int pantallas=1;
+    private  int pantallas=0;
     //private int mapeo=200;
     private PApplet app;
     private Workbook workbook;
@@ -63,6 +63,10 @@ public class Logic implements Observer{
 
     private String code="";
 
+    //objeto de simulación de celular
+
+    Celular phone;
+
 
     public Logic(PApplet app) {
         this.app=app;
@@ -74,9 +78,10 @@ public class Logic implements Observer{
         bag= app.loadImage("data/partidosMaleta.png");
         finish=app.loadImage("data/pantallaFinal.jpg");
         cod();
-        manager= new ManagerComunicacion(app, code);
-        manager.addObserver(this);
-        new Thread(manager).start();
+
+      //  manager= new ManagerComunicacion(app, code);
+        //manager.addObserver(this);
+        //new Thread(manager).start();
 
         initUsers();
 
@@ -86,16 +91,19 @@ public class Logic implements Observer{
             e.printStackTrace();
         }
 
-        /*recomendacion= new PartidoRecomendado(partidos,usuarios);
-        recomendacion.partidosAceptables();
-        recomendacion.partidosIdeales();*/
+        phone = new Celular(app,"user uno");
+        phone.addObserver(this);
+
+       // recomendacion= new PartidoRecomendado(partidos,usuarios);
+        //recomendacion.partidosAceptables();
+        //recomendacion.partidosIdeales();
 
     }
 
     public void initUsers(){
 
-    //    usuarios.add(new User("asdas","COL", "MEX","CHL","ESP"));
-  //      usuarios.add(new User("asdasd","COL", "URY","CHL","ESP"));
+     //   usuarios.add(new User("asdas","COL", "MEX","CHL","ESP"));
+       // usuarios.add(new User("asdasd","COL", "URY","CHL","ESP"));
 //        usuarios.add(new User("asdasd","COL", "GRC","KOR","ESP"));
 
     }
@@ -207,8 +215,9 @@ public class Logic implements Observer{
             case 0:
 
                 app.image(start,0,0,app.width, app.height);
-                app.textSize(24);
-                app.text(manager.getCode(),900,500);
+                phone.pintar();
+         //       app.textSize(24);
+       //         app.text(manager.getCode(),900,500);
 
                 app.text(usuarios.size()+"/"+NUMERO_JUGADORES,900,600);
 
@@ -253,6 +262,8 @@ public class Logic implements Observer{
 
 
     public void pressed(){
+
+        phone.seleccionar();
         coger();
 
         //ZONA SENSIBLE PARA VER PARTIDOS
@@ -305,7 +316,6 @@ public class Logic implements Observer{
             usuarios.add((User) arg);
             System.out.println(usuarios.size());
             System.out.println(((User) arg).getNombreUsuario()+":"+((User) arg).getEquipoUno()+":"+((User) arg).getEquipoDos()+":"+((User) arg).getEquipoTres()+":"+((User) arg).getEquipoCuatro());
-
         }
 
         if(usuarios.size()==NUMERO_JUGADORES){
@@ -317,6 +327,7 @@ public class Logic implements Observer{
         recomendacion.partidosIdeales();
 
         }
+
     }
 
 
