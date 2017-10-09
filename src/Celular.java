@@ -1,4 +1,5 @@
 import processing.core.PApplet;
+import processing.core.PImage;
 
 import java.util.ArrayList;
 import java.util.Observable;
@@ -48,30 +49,35 @@ public class Celular extends Observable {
     private String equipostres="";
     private String equiposCuatro="";
 
+    private PImage celu;
+
     public Celular(PApplet app,String user , int x, int y) {
         this.x=x;
         this.y=y;
 
-        posXInputUno=x+150;
-        posYInputUno=y+50;
+        posXInputUno=x+175;
+        posYInputUno=y+140;
 
-        posXInputDos=x+150;
-        posYInputDos=y+100;
+        posXInputDos=x+175;
+        posYInputDos=y+185;
 
-        posXInputTres=x+150;
-        posYInputTres=y+150;
+        posXInputTres=x+175;
+        posYInputTres=y+225;
 
-        posXInputCuatro=x+150;
-        posYInputCuatro=y+200;
+        posXInputCuatro=x+175;
+        posYInputCuatro=y+265;
 
         posXbuttonsend=x+0;
-        posYbuttonsend=y+250;
+        posYbuttonsend=y+300;
 
 
 this.app=app;
+
         this.nombreUser=user;
         equipos= new ArrayList<EquipoSeleccionado>();
         initTeam();
+
+        celu=app.loadImage("data/mobile.jpg");
 
     }
 
@@ -153,34 +159,34 @@ this.app=app;
 
         app.fill(255);
         app.rect(x,y,200,300);
+        app.image(celu, x,y,200,350);
 
 
         //boton de enviar
-        app.fill(0);
-        app.rect(posXbuttonsend,posYbuttonsend,200,50);
-        app.fill(255);
-        app.text("ENVIAR",posXbuttonsend+100, posYbuttonsend+25);
+        //app.fill(0);
+        //app.rect(posXbuttonsend,posYbuttonsend,200,50);
+        //app.fill(255);
+        //app.text("ENVIAR",posXbuttonsend+100, posYbuttonsend+25);
         //circulos de partidos
-        app.fill(0);
-        app.ellipse(posXInputUno,posYInputUno,40,40);
+        //app.fill(0);
+       // app.ellipse(posXInputUno,posYInputUno,35,35);
         app.fill(255);
-        app.text(equiposUno,posXInputUno,posYInputUno);
+        app.text(equiposUno,posXInputUno-10,posYInputUno);
 
-        app.fill(0);
-        app.ellipse(posXInputDos,posYInputDos,40,40);
+        //app.fill(0);
+        //app.ellipse(posXInputDos,posYInputDos,35,35);
         app.fill(255);
-        app.text(equiposDos,posXInputDos,posYInputDos);
+        app.text(equiposDos,posXInputDos-10,posYInputDos);
 
-        app.fill(0);
-        app.ellipse(posXInputTres,posYInputTres,40,40);
+        //app.fill(0);
+       // app.ellipse(posXInputTres,posYInputTres,35,35);
         app.fill(255);
-        app.text(equipostres,posXInputTres,posYInputTres);
+        app.text(equipostres,posXInputTres-10,posYInputTres);
 
-
-        app.fill(0);
-        app.ellipse(posXInputCuatro,posYInputCuatro,40,40);
+        //app.fill(0);
+        //app.ellipse(posXInputCuatro,posYInputCuatro,35,35);
         app.fill(255);
-        app.text(equiposCuatro,posXInputCuatro,posYInputCuatro);
+        app.text(equiposCuatro,posXInputCuatro-10,posYInputCuatro);
 
 
         for (int i=0; i< equipos.size();i++){
