@@ -66,6 +66,7 @@ public class Logic implements Observer{
     //objeto de simulación de celular
 
     Celular phone;
+    Celular phoneDos;
 
 
     public Logic(PApplet app) {
@@ -93,6 +94,9 @@ public class Logic implements Observer{
 
         phone = new Celular(app,"user uno", 200,200);
         phone.addObserver(this);
+
+        phoneDos = new Celular(app,"user dos", 500,200);
+        phoneDos.addObserver(this);
 
        // recomendacion= new PartidoRecomendado(partidos,usuarios);
         //recomendacion.partidosAceptables();
@@ -216,6 +220,7 @@ public class Logic implements Observer{
 
                 app.image(start,0,0,app.width, app.height);
                 phone.pintar();
+                phoneDos.pintar();
          //       app.textSize(24);
        //         app.text(manager.getCode(),900,500);
 
@@ -264,6 +269,7 @@ public class Logic implements Observer{
     public void pressed(){
 
         phone.seleccionar();
+        phoneDos.seleccionar();
         coger();
 
         //ZONA SENSIBLE PARA VER PARTIDOS
