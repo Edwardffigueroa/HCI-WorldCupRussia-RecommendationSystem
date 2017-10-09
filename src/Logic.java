@@ -92,13 +92,13 @@ public class Logic implements Observer{
             e.printStackTrace();
         }
 
-        phone = new Celular(app,"user uno", 200,200);
+        phone = new Celular(app,"user uno", (app.width/2)-300 ,300);
         phone.addObserver(this);
 
-        phoneDos = new Celular(app,"user dos", 500,200);
+        phoneDos = new Celular(app,"user dos", (app.width/2)+200 ,300);
         phoneDos.addObserver(this);
 
-       // recomendacion= new PartidoRecomendado(partidos,usuarios);
+        //recomendacion= new PartidoRecomendado(partidos,usuarios);
         //recomendacion.partidosAceptables();
         //recomendacion.partidosIdeales();
 
@@ -219,6 +219,7 @@ public class Logic implements Observer{
             case 0:
 
                 app.image(start,0,0,app.width, app.height);
+                app.textSize(12);
                 phone.pintar();
                 phoneDos.pintar();
          //       app.textSize(24);
@@ -268,13 +269,18 @@ public class Logic implements Observer{
 
     public void pressed(){
 
+        /*if(app.mouseX>0&&app.mouseX<100&&app.mouseY>0&&app.mouseY<100){
+            recomendacion.reset();
+            pantallas=0;
+        }*/
+
         phone.seleccionar();
         phoneDos.seleccionar();
         coger();
 
         //ZONA SENSIBLE PARA VER PARTIDOS
         if (app.dist(maleta.getPos().x, maleta.getPos().y,app.mouseX, app.mouseY)<125&&pantallas==1){
-            pantallas=2;
+          //  pantallas=2;
         }
 
         //ZONA SENSIBLE PARA SALIR DE LA OPCION DE VER LOS PARTIDOS
@@ -352,6 +358,14 @@ public class Logic implements Observer{
 
     public String getCode() {
         return code;
+    }
+
+    public int getPantallas() {
+        return pantallas;
+    }
+
+    public void setPantallas(int pantallas) {
+        this.pantallas = pantallas;
     }
 
     public static int getNumeroJugadores() {

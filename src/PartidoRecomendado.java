@@ -87,6 +87,7 @@ public class PartidoRecomendado {
             totalEquipos.add(u.getEquipoCuatro());
 
         }
+
         //for (int i = 0; i <totalEquipos.size() ; i++) {
            // System.out.println(totalEquipos.get(i));
         //}
@@ -134,9 +135,12 @@ public class PartidoRecomendado {
         return intersection;
     }
 
+    public void reset(){
 
+        //partidos.clear();
+        usuarios.clear();
+        interseccion.clear();
 
-
-
+    }
 
 }

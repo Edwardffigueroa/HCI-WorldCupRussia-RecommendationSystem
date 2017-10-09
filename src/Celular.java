@@ -52,16 +52,16 @@ public class Celular extends Observable {
         this.x=x;
         this.y=y;
 
-        posXInputUno=x+50;
+        posXInputUno=x+150;
         posYInputUno=y+50;
 
-        posXInputDos=x+50;
+        posXInputDos=x+150;
         posYInputDos=y+100;
 
-        posXInputTres=x+50;
+        posXInputTres=x+150;
         posYInputTres=y+150;
 
-        posXInputCuatro=x+50;
+        posXInputCuatro=x+150;
         posYInputCuatro=y+200;
 
         posXbuttonsend=x+0;
@@ -158,8 +158,9 @@ this.app=app;
         //boton de enviar
         app.fill(0);
         app.rect(posXbuttonsend,posYbuttonsend,200,50);
-
-//circulos de partidos
+        app.fill(255);
+        app.text("ENVIAR",posXbuttonsend+100, posYbuttonsend+25);
+        //circulos de partidos
         app.fill(0);
         app.ellipse(posXInputUno,posYInputUno,40,40);
         app.fill(255);

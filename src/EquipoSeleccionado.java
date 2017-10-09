@@ -26,9 +26,10 @@ public class EquipoSeleccionado {
 
 
         app.fill(0);
-
+app.textSize(12);
         app.rect(posX, posY, 80, 15);
         app.fill(255);
+
         app.text(equipo, posX, posY+15);
 
     }
